@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9F519EF8-800F-40CB-9545-9AEADF0F387D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GMS.Framework.Utility</RootNamespace>
+    <AssemblyName>GMS.Framework.Utility</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\bin\GMS.Framework.Utility.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="AssemblyHelper.cs" />
+    <Compile Include="Caching.cs" />
+    <Compile Include="Collection.cs" />
+    <Compile Include="Converter.cs" />
+    <Compile Include="Cookie.cs" />
+    <Compile Include="Diff.cs" />
+    <Compile Include="Encrypt.cs" />
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="Exception.cs" />
+    <Compile Include="Fetch.cs" />
+    <Compile Include="FileWatchHelper.cs" />
+    <Compile Include="GeoHelper.cs" />
+    <Compile Include="ImageUtil.cs" />
+    <Compile Include="JsUtil.cs" />
+    <Compile Include="MailHelper.cs" />
+    <Compile Include="NetHelper.cs" />
+    <Compile Include="ObjectHelper.cs" />
+    <Compile Include="PermutationAndCombination.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegExp.cs" />
+    <Compile Include="SerializationHelper.cs" />
+    <Compile Include="SerializeHelper.cs" />
+    <Compile Include="StringHelper.cs" />
+    <Compile Include="StringUtil.cs" />
+    <Compile Include="ValidateCode\AnimatedGifEncoder.cs" />
+    <Compile Include="ValidateCode\GifDecoder.cs" />
+    <Compile Include="ValidateCode\LZWEncoder.cs" />
+    <Compile Include="ValidateCode\NeuQuant.cs" />
+    <Compile Include="ValidateCode\ValidateCodeType.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style1.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style10.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style11.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style12.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style13.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style14.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style2.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style3.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style4.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style5.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style6.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style7.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style8.cs" />
+    <Compile Include="ValidateCode\ValidateCode_Style9.cs" />
+    <Compile Include="WcfServiceProxy.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

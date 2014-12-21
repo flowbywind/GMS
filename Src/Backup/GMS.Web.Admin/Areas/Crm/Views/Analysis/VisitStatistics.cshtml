@@ -1,0 +1,110 @@
+﻿@using GMS.Framework.Contract
+@using GMS.Framework.Utility
+@using GMS.Framework.Web.Controls
+@using GMS.Crm.Contract
+@using GMS.Web
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section PageSpecificStyleSheetIncludes{
+
+}
+@section PageSpecificJavascriptIncludes{
+    <script type="text/javascript" src="@Url.StaticFile("/content/scripts/highcharts.js")"></script>
+    <script type="text/javascript" src="@Url.StaticFile("/content/scripts/highcharts.exporting.js")"></script>
+    <script type="text/javascript">
+  
+    var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: '时段来访来电统计',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '按一天24小时来访来电统计',
+                x: -20
+            },
+            xAxis: {
+                categories: [@Html.Raw(ViewData["hours"].ToString())],
+            },
+            yAxis: {
+                title: {
+                    text: '数目 (个)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                    this.x + ': ' + this.y + '个';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [{
+                name: '来电来访总数',
+                data: [@Html.Raw(ViewData["visitRecordCount"].ToString())]
+            }, {
+                name: '来访数',
+                data: [@Html.Raw(ViewData["visitCount"].ToString())]
+            }, {
+                name: '来电数',
+                data: [@Html.Raw(ViewData["telCount"].ToString())]
+            }]
+        });
+
+
+        var dates = $("#startDate, #endDate").datepicker({
+            dateFormat: "yy-mm-dd",
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 2,
+            onSelect: function (selectedDate) {
+                var option = this.id == "startDate" ? "minDate" : "maxDate",
+				instance = $(this).data("datepicker"),
+				date = $.datepicker.parseDate(
+					instance.settings.dateFormat ||
+					$.datepicker._defaults.dateFormat,
+					selectedDate, instance.settings);
+                dates.not(this).datepicker("option", option, date);
+            }
+        });
+    </script>
+}
+<div>
+    
+    @using (Html.BeginForm(null, null, null, FormMethod.Get, new { id = "search", @class = "well form-inline" }))
+    { 
+    <div>
+            开始时间：
+            @Html.TextBox("startDate", null, new { @class = "m-wrap small" })
+            
+            结束时间：
+            @Html.TextBox("endDate", null, new { @class = "m-wrap small" })
+                　
+            <button type="submit" class="btn">查询 <i class="icon-search"></i></button>
+             
+    </div>
+    }
+    
+</div>
+
+<div class="breadcrumb">
+    <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+</div>
+

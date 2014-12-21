@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="GMS.Web.OrgChart.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:localControls="clr-namespace:GMS.Web.OrgChart.Controls"
+    >
+
+    <Grid x:Name="LayoutRoot">
+        <localControls:Activity x:Name="activity" IsActive="True" Message="加载数据中，请稍等...."/>
+    </Grid>
+</UserControl>

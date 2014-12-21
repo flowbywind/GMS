@@ -1,0 +1,5 @@
+D:\Git\Web\GMS\bin\GMS.Cms.DAL.dll
+D:\Git\Web\GMS\bin\GMS.Cms.DAL.pdb
+D:\Git\Web\GMS\Src\GMS.Cms.DAL\obj\Debug\GMS.Cms.DAL.csprojResolveAssemblyReference.cache
+D:\Git\Web\GMS\Src\GMS.Cms.DAL\obj\Debug\GMS.Cms.DAL.dll
+D:\Git\Web\GMS\Src\GMS.Cms.DAL\obj\Debug\GMS.Cms.DAL.pdb

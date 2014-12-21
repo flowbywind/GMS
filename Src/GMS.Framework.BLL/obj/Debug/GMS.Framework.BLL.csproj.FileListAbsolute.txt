@@ -1,0 +1,5 @@
+D:\Git\Web\GMS\bin\GMS.Framework.BLL.XML
+D:\Git\Web\GMS\bin\GMS.Framework.BLL.dll
+D:\Git\Web\GMS\bin\GMS.Framework.BLL.pdb
+D:\Git\Web\GMS\Src\GMS.Framework.BLL\obj\Debug\GMS.Framework.BLL.dll
+D:\Git\Web\GMS\Src\GMS.Framework.BLL\obj\Debug\GMS.Framework.BLL.pdb

@@ -1,0 +1,79 @@
+﻿@using GMS.Framework.Contract
+@using GMS.Framework.Utility
+@using GMS.Framework.Web.Controls
+@using GMS.Crm.Contract
+
+@model PagedList<Project>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row-fluid">
+    <div class="span4">
+        <div>
+            <a class="btn red" id="delete" href="javascript:;"><i class="icon-trash icon-white"></i> 删除</a>
+            <a class="btn blue thickbox" title='添加新项目' href="@Url.Action("Create")?TB_iframe=true&height=200&width=400"><i class="icon-plus icon-white"></i> 新增</a>
+        </div>
+    </div>
+    <div class="span8">
+        @using (Html.BeginForm(null, null, null, FormMethod.Get, new { id = "search" }))
+        { 
+        <div class="dataTables_filter">
+            <label>
+                <button type="submit" class="btn">搜索 <i class="icon-search"></i></button>
+             </label>
+            <label>
+                <span>名称：</span>
+                @Html.TextBox("Name", null, new { @class = "m-wrap small" })
+            </label>
+        </div>
+        }
+    </div>
+</div>
+
+@using (Html.BeginForm("Delete", "Project", FormMethod.Post, new { id = "mainForm" }))
+{
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th style="width: 8px;">
+                <input type="checkbox" id="checkall" class="group-checkable" />
+            </th>
+            <th>
+                名称
+            </th>
+            <th>
+                创建时间
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+        <tr>
+            <td>
+                <input type="checkbox" class="checkboxes" name='ids' value='@m.ID' />
+            </td>
+            <td>
+                @m.Name
+            </td>
+            <td>
+                @m.CreateTime.ToCnDataString()
+            </td>
+            <td>
+                <a class="btn mini purple thickbox" title='编辑项目内容' href="@Url.Action("Edit", new { id = m.ID })?TB_iframe=true&height=200&width=400">
+                    <i class="icon-edit"></i>
+                    编辑
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+<div class="dataTables_paginate paging_bootstrap pagination">
+    @Html.Pager(Model, new PagerOptions() { ShowTotalItemCount = true })
+</div>
+

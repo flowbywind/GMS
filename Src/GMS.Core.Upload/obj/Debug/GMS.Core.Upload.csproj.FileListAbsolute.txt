@@ -1,0 +1,5 @@
+D:\Git\Web\GMS\bin\GMS.Core.Upload.dll
+D:\Git\Web\GMS\bin\GMS.Core.Upload.pdb
+D:\Git\Web\GMS\Src\GMS.Core.Upload\obj\Debug\GMS.Core.Upload.csprojResolveAssemblyReference.cache
+D:\Git\Web\GMS\Src\GMS.Core.Upload\obj\Debug\GMS.Core.Upload.dll
+D:\Git\Web\GMS\Src\GMS.Core.Upload\obj\Debug\GMS.Core.Upload.pdb

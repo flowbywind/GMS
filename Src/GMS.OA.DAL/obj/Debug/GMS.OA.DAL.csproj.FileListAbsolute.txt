@@ -1,0 +1,5 @@
+D:\Git\Web\GMS\bin\GMS.OA.DAL.dll
+D:\Git\Web\GMS\bin\GMS.OA.DAL.pdb
+D:\Git\Web\GMS\Src\GMS.OA.DAL\obj\Debug\GMS.OA.DAL.csprojResolveAssemblyReference.cache
+D:\Git\Web\GMS\Src\GMS.OA.DAL\obj\Debug\GMS.OA.DAL.dll
+D:\Git\Web\GMS\Src\GMS.OA.DAL\obj\Debug\GMS.OA.DAL.pdb

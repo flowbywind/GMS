@@ -1,0 +1,295 @@
+﻿<ResourceDictionary 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"    
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  xmlns:localControls="clr-namespace:GMS.Web.OrgChart.Controls"
+  xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
+  >
+    <Style TargetType="localControls:ImageButton">
+        <!-- key lines to enable the control -->
+        <Setter Property="IsEnabled" Value="true" />
+        <Setter Property="IsTabStop" Value="true" />
+        <Setter Property="Cursor" Value="Hand" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="localControls:ImageButton">
+                    <Grid x:Name="Root" Margin="0" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <Image x:Name="normalBlock" Source="{TemplateBinding NormalImage}" Stretch="None"/>
+                        <Image x:Name="hoverBlock" Source="{TemplateBinding HoverImage}" Stretch="None" Opacity="0"/>
+                        <Image x:Name="clickBlock" Source="{TemplateBinding ClickImage}" Stretch="None" Opacity="0"/>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Unfocused"/>
+                                <VisualState x:Name="Focused"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="00:00:0.5" To="MouseOver"/>
+                                    <VisualTransition GeneratedDuration="00:00:0.1" To="Pressed"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="normalBlock" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="hoverBlock" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="normalBlock" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="hoverBlock" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.3"/>
+                                        <DoubleAnimation Storyboard.TargetName="clickBlock" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled" />
+                                <VisualState x:Name="Normal" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="localControls:BranchNode">
+        <Setter Property="Margin" Value="4,0,4,0"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#edf4fe" />
+                    <GradientStop Color="#dfe8f6" Offset="1" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#9fa8b7"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="localControls:BranchNode">
+                    <Grid x:Name="rootPanel" HorizontalAlignment="Center" VerticalAlignment="Top" Height="{TemplateBinding Height}">
+                        <StackPanel Orientation="Vertical" DataContext="{TemplateBinding Branch}">
+                            <Border x:Name="titlePanel" HorizontalAlignment="Center"  Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3" BorderThickness="1">
+                                <Border.Resources>
+                                    <SolidColorBrush x:Key="normalBorder" Color="#9fa8b7"/>
+                                    <SolidColorBrush x:Key="hightlightBorder" Color="Red"/>
+                                </Border.Resources>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <ContentPresenter Content="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
+                                        <localControls:ImageButton Margin="5" x:Name="edit"
+                                                       NormalImage="/GMS.Web.OrgChart;component/Images/ico_edit_normal.png"
+                                                       HoverImage="/GMS.Web.OrgChart;component/Images/ico_edit_hover.png"
+                                                       ClickImage="/GMS.Web.OrgChart;component/Images/ico_edit_click.png"/>
+                                    </StackPanel>
+
+                                    <ItemsControl ItemsSource="{Binding Staffs}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <localControls:StaffNode Staff="{Binding}"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                </StackPanel> 
+                                <!--<toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <toolkit:MenuItem Header="删除" FontFamily="Microsoft Yahei, SimSun" FontSize="13" x:Name="remove"/>
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>-->
+                                
+                            </Border>
+                            <Border Height="20" Width="1" Background="Gray" Visibility="{Binding LineVisibility}"/>
+                            <ItemsControl ItemsSource="{Binding Embranchment}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Border Height="1" Background="Gray" RenderTransformOrigin="{Binding LineRenderTransformOrigin}" RenderTransform="{Binding LineRenderTransform}"/>
+                                            <Border Height="20" Width="1" Background="Gray"/>
+                                            <localControls:BranchNode Branch="{Binding}"/>
+                                        </StackPanel>
+                                        
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                                
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="localControls:StaffNode">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="MinWidth" Value="60"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="localControls:StaffNode">
+                    <Border BorderBrush="#9fa8b7" BorderThickness="1" Background="#fff">
+                        <Grid DataContext="{TemplateBinding Staff}">
+                            <TextBlock Text="{Binding Name}" Margin="2"/>
+
+                            <localControls:ImageButton Margin="2" x:Name="edit" HorizontalAlignment="Right"
+                                                               NormalImage="/GMS.Web.OrgChart;component/Images/ico_edit_normal.png"
+                                                               HoverImage="/GMS.Web.OrgChart;component/Images/ico_edit_hover.png"
+                                                               ClickImage="/GMS.Web.OrgChart;component/Images/ico_edit_click.png"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="localControls:Activity">
+        <Setter Property="ActiveContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+                        <Border Background="#FFFFFFFF" BorderThickness="1,1,1,1" CornerRadius="2,2,2,2" Height="51" Margin="0,2,0,0" VerticalAlignment="Top">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFA3AEB9" Offset="0"/>
+                                    <GradientStop Color="#FF8399A9" Offset="0.375"/>
+                                    <GradientStop Color="#FF718597" Offset="0.375"/>
+                                    <GradientStop Color="#FF617584" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Border CornerRadius="1.5,1.5,1.5,1.5" Margin="1,1,1,1">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFB8B8B8" Offset="0.996"/>
+                                        <GradientStop Color="#FFF6F8F9" Offset="0.02"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <StackPanel>
+                                    <Grid>
+                                        <TextBlock HorizontalAlignment="Stretch" Margin="8,4,8,4" VerticalAlignment="Center" FontWeight="Normal" Text="{Binding}" TextWrapping="Wrap"/>
+                                        <Image Visibility="Collapsed" Source="/RapidSL.SL.Controls;component/Images/ico_close.png" Stretch="None" HorizontalAlignment="Right" />
+                                    </Grid>
+                                    <ProgressBar Height="15" Margin="8,0,8,0" IsIndeterminate="True"/>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="DisplayAfter" Value="00:00:00.05" />
+        <Setter Property="MinDisplayTime" Value="00:00:00.75" />
+        <Setter Property="AutoBind" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="localControls:Activity">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ActivityDisplay">
+                                <VisualState x:Name="Hidden">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter1" Storyboard.TargetProperty="(UIElement.IsHitTestVisible)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <sys:Boolean>True</sys:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentControl" Storyboard.TargetProperty="(Control.IsEnabled)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <sys:Boolean>True</sys:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Displaying">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter1" Storyboard.TargetProperty="(UIElement.IsHitTestVisible)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <sys:Boolean>False</sys:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="contentControl" Storyboard.TargetProperty="(Control.IsEnabled)" Duration="00:00:00.0010000">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <sys:Boolean>False</sys:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="#5AFFFFFF"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentControl x:Name="contentControl"
+										VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <ContentPresenter x:Name="contentPresenter1" Canvas.ZIndex="0" Content="{TemplateBinding Content}"/>
+                        </ContentControl>
+                        <Rectangle x:Name="rectangle" Fill="#32FFFFFF" Canvas.ZIndex="1" Visibility="Collapsed" />
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Canvas.ZIndex="2" Visibility="Collapsed"
+                                          Content="{TemplateBinding Message}"
+                                          ContentTemplate="{TemplateBinding ActiveContentTemplate}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GMS.Framework.DAL</name>
+    </assembly>
+    <members>
+        <member name="T:GMS.Framework.DAL.DbContextBase">
+            <summary>
+            DAL基类，实现Repository通用泛型数据访问模式
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CacheConfig>
+  <CacheProviderItems>
+    <CacheProviderItem name="LocalCacheProvider" type="GMS.Core.Cache.LocalCacheProvider, GMS.Core.Cache" desc="本地缓存" />
+  </CacheProviderItems>
+  <CacheConfigItems>
+    <CacheConfigItem desc="全局缓存" priority="0" keyRegex=".*" moduleRegex=".*" providerName="LocalCacheProvider" minitus="30" isAbsoluteExpiration="true" />
+    <CacheConfigItem desc="LoginInfo缓存" priority="1" keyRegex="LoginInfo.*" moduleRegex=".*" providerName="LocalCacheProvider" minitus="10" isAbsoluteExpiration="true" />
+  </CacheConfigItems>
+</CacheConfig>

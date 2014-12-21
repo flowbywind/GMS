@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="GMS.Web.OrgChart.OrgChart"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    FontFamily="Microsoft Yahei, SimSun"
+    FontSize="13"
+    xmlns:localControls="clr-namespace:GMS.Web.OrgChart.Controls"
+    >
+
+    <Grid x:Name="LayoutRoot" Background="#f5f5f5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Margin="5" Grid.Column="1" HorizontalAlignment="Center">拖拽下面的员工或部门进行归类，或拖拽下面的部门到左部删除，或推拽下面的员工到右部删除：</TextBlock>
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Background="White" Margin="30">
+            <localControls:BranchNode  x:Name="mainBranchNode"/>
+        </ScrollViewer>
+
+        <Button Name="save" Grid.Column="1" Width="50" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="29">保存</Button>
+
+        <TextBlock Margin="5" Grid.Column="2" HorizontalAlignment="Center">推拽下面的员工到中部部门：</TextBlock>
+        <localControls:BranchNode Grid.Column="2" x:Name="unAllocateStaffNode" Margin="30"/>
+
+        <TextBlock Margin="5" HorizontalAlignment="Center">推拽下面的部门到中部部门：</TextBlock>
+        <localControls:BranchNode Grid.Column="0" x:Name="unAllocateBranchNode" Margin="30">
+            <localControls:BranchNode.Template>
+                <ControlTemplate TargetType="localControls:BranchNode">
+                    <Grid x:Name="rootPanel" VerticalAlignment="Top" Height="{TemplateBinding Height}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" DataContext="{TemplateBinding Branch}">
+                            <Border x:Name="titlePanel" HorizontalAlignment="Stretch"  Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3" BorderThickness="1">
+                                <Border.Resources>
+                                    <SolidColorBrush x:Key="normalBorder" Color="#9fa8b7"/>
+                                    <SolidColorBrush x:Key="hightlightBorder" Color="Red"/>
+                                </Border.Resources>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <ContentPresenter Content="{Binding Name}" VerticalAlignment="Center" Margin="5"/>
+                                    </StackPanel>
+
+                                    <ItemsControl ItemsSource="{Binding Embranchment}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <localControls:BranchNode Branch="{Binding}" Margin="3"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                </StackPanel>
+
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </localControls:BranchNode.Template>
+        </localControls:BranchNode>
+    </Grid>
+</UserControl>

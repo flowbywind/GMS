@@ -1,0 +1,5 @@
+D:\Git\Web\GMS\Src\GMS.Framework.Web\obj\Debug\GMS.Framework.Web.csprojResolveAssemblyReference.cache
+D:\Git\Web\GMS\bin\GMS.Framework.Web.dll
+D:\Git\Web\GMS\bin\GMS.Framework.Web.pdb
+D:\Git\Web\GMS\Src\GMS.Framework.Web\obj\Debug\GMS.Framework.Web.dll
+D:\Git\Web\GMS\Src\GMS.Framework.Web\obj\Debug\GMS.Framework.Web.pdb

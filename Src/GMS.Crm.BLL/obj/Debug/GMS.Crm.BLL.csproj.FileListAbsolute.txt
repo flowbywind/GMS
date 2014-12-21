@@ -1,0 +1,5 @@
+D:\Git\Web\GMS\bin\GMS.Crm.BLL.dll
+D:\Git\Web\GMS\bin\GMS.Crm.BLL.pdb
+D:\Git\Web\GMS\Src\GMS.Crm.BLL\obj\Debug\GMS.Crm.BLL.csprojResolveAssemblyReference.cache
+D:\Git\Web\GMS\Src\GMS.Crm.BLL\obj\Debug\GMS.Crm.BLL.dll
+D:\Git\Web\GMS\Src\GMS.Crm.BLL\obj\Debug\GMS.Crm.BLL.pdb

@@ -1,0 +1,23 @@
+﻿<controls:ChildWindow x:Class="GMS.Web.OrgChart.Controls.BranchEdit"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           FontFamily="Microsoft Yahei, SimSun"
+           FontSize="13"
+           Title="编辑部门信息">
+    <Grid x:Name="LayoutRoot" Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock>名称：</TextBlock>
+            <TextBox x:Name="name" Text="{Binding Name}" Width="200"/>
+        </StackPanel>
+
+
+        <Button x:Name="CancelButton" Content="取消" Click="CancelButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1" />
+        <Button x:Name="OKButton" Content="确定" Click="OKButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="1" />
+    </Grid>
+</controls:ChildWindow>

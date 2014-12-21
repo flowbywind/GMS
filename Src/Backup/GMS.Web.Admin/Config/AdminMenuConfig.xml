@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AdminMenuConfig>
+  <AdminMenuGroups>
+    <AdminMenuGroup name="管理首页" url="/Account/Auth/Index" icon="icon-home" info="欢迎登录GMS系统！">
+    </AdminMenuGroup>
+    <AdminMenuGroup name="系统管理" icon="icon-cog">
+      <AdminMenuArray>
+        <AdminMenu name="用户管理" url="/Account/User/Index" info="添加修改删除用户" permission="AccountManage_User" />
+        <AdminMenu name="角色管理" url="/Account/Role/Index" info="添加修改删除角色" permission="AccountManage_Role" />
+      </AdminMenuArray>
+    </AdminMenuGroup>
+
+    <AdminMenuGroup name="CMS管理" icon="icon-leaf">
+      <AdminMenuArray>
+        <AdminMenu name="文章管理" url="/Cms/Article/Index" info="添加修改删除文章" permission="CmsManage_Article" />
+        <AdminMenu name="文章频道管理" url="/Cms/Channel/Index" info="添加修改删除文章频道" permission="CmsManage_Channel" />
+      </AdminMenuArray>
+    </AdminMenuGroup>
+
+    <AdminMenuGroup name="OA管理" icon="icon-sitemap">
+      <AdminMenuArray>
+        <AdminMenu name="员工管理" url="/OA/Staff/Index" info="添加修改删除员工信息" permission="OAManage_Staff" />
+        <AdminMenu name="部门管理" url="/OA/Branch/Index" info="添加修改删除部门信息" permission="OAManage_Branch" />
+        <AdminMenu name="组织结构管理" url="/OA/Org/Index" info="管理部门从属关系及员工所属部门" permission="OAManage_Org" />
+      </AdminMenuArray>
+    </AdminMenuGroup>
+
+    <AdminMenuGroup name="CRM管理" icon="icon-phone-sign">
+      <AdminMenuArray>
+        <AdminMenu name="来访来电" url="/Crm/VisitRecord/Index" info="添加修改删除来访来电" permission="CrmManage_VisitRecord" />
+        <AdminMenu name="客户管理" url="/Crm/Customer/Index" info="添加修改删除客户" permission="CrmManage_Customer" />
+        <AdminMenu name="项目管理" url="/Crm/Project/Index" info="添加修改删除项目" permission="CrmManage_Project" />
+        <AdminMenu name="业绩统计" url="/Crm/Analysis/Index" info="查看业绩统计" permission="CrmManage_Analysis" />
+        <AdminMenu name="来电统计" url="/Crm/Analysis/VisitStatistics" info="查看来电统计" permission="CrmManage_Analysis" />
+      </AdminMenuArray>
+    </AdminMenuGroup>
+
+  </AdminMenuGroups>
+</AdminMenuConfig>

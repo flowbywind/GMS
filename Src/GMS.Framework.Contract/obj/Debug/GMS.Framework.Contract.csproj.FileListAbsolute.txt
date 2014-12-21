@@ -1,0 +1,6 @@
+D:\Git\Web\GMS\bin\GMS.Framework.Contract.XML
+D:\Git\Web\GMS\bin\GMS.Framework.Contract.dll
+D:\Git\Web\GMS\bin\GMS.Framework.Contract.pdb
+D:\Git\Web\GMS\Src\GMS.Framework.Contract\obj\Debug\GMS.Framework.Contract.csprojResolveAssemblyReference.cache
+D:\Git\Web\GMS\Src\GMS.Framework.Contract\obj\Debug\GMS.Framework.Contract.dll
+D:\Git\Web\GMS\Src\GMS.Framework.Contract\obj\Debug\GMS.Framework.Contract.pdb

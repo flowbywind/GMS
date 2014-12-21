@@ -1,0 +1,90 @@
+﻿@using GMS.Framework.Contract
+@using GMS.Framework.Web.Controls
+@using GMS.Framework.Utility
+@using GMS.OA.Contract
+@using GMS.Web
+@model Staff
+@{
+    Layout = "~/Views/Shared/_Layout.Edit.cshtml";
+}
+@section PageSpecificStyleSheetIncludes{
+    <style type="text/css">
+        .controls label
+        {
+            display:inline;
+        }
+    </style>
+}
+@section PageSpecificJavascriptIncludes{
+    <script type="text/javascript">
+        $("#BirthDate").datepicker();
+   </script>
+}
+@section MainContent{
+<div class="portlet-body form-horizontal form-bordered form-row-stripped">
+    <div class="row-fluid"> 
+            <div class="alert alert-info">
+                <button class="close" data-dismiss="alert"></button>
+                分配到部门请到<strong>“组织结构管理”</strong>菜单操作！
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>姓名：</label>
+                <div class="controls">
+                @Html.TextBoxFor(m => m.Name, new { @class = "m-wrap" })
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Name)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">职位：</label>
+                <div class="controls">
+                @Html.DropDownList("Position", "暂无")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Position)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">性别：</label>
+                <div class="controls">
+                @Html.RadioBoxList("Gender")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Gender)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">生日：</label>
+                <div class="controls">
+                @Html.TextBox("BirthDate", Model.BirthDate.ToCnDataString(),  new { @class = "m-wrap" })
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.BirthDate)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">电子邮件：</label>
+                <div class="controls">
+                @Html.TextBoxFor(m => m.Email, new { @class = "m-wrap" })
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Email)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">电话：</label>
+                <div class="controls">
+                @Html.TextBoxFor(m => m.Tel, new { @class = "m-wrap" })
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Tel)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">联系地址：</label>
+                <div class="controls">
+                @Html.TextBoxFor(m => m.Address, new { @class = "m-wrap" })
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Address)</span>
+                </div>
+            </div>
+            
+    </div>
+</div>
+}
+

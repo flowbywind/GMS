@@ -1,0 +1,5 @@
+D:\Git\Web\GMS\bin\GMS.Framework.Utility.XML
+D:\Git\Web\GMS\bin\GMS.Framework.Utility.dll
+D:\Git\Web\GMS\bin\GMS.Framework.Utility.pdb
+D:\Git\Web\GMS\Src\GMS.Framework.Utility\obj\Debug\GMS.Framework.Utility.dll
+D:\Git\Web\GMS\Src\GMS.Framework.Utility\obj\Debug\GMS.Framework.Utility.pdb

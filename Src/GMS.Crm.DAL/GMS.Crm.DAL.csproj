@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0BC4354A-1C5A-4D0C-A510-8C88CC880433}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GMS.Crm.DAL</RootNamespace>
+    <AssemblyName>GMS.Crm.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CrmDbContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GMS.Core.Config\GMS.Core.Config.csproj">
+      <Project>{3BF4147E-D01D-4FFF-B8E7-FE24959B2D7E}</Project>
+      <Name>GMS.Core.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMS.Core.Log\GMS.Core.Log.csproj">
+      <Project>{8AE51EE2-67DB-4F57-98FE-CBB890C9A5A2}</Project>
+      <Name>GMS.Core.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMS.Crm.Contract\GMS.Crm.Contract.csproj">
+      <Project>{0DB50285-89DE-42C7-9274-8D1633AAF01C}</Project>
+      <Name>GMS.Crm.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMS.Framework.Contract\GMS.Framework.Contract.csproj">
+      <Project>{11214D97-F23C-4E16-AA12-ECD824454744}</Project>
+      <Name>GMS.Framework.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GMS.Framework.DAL\GMS.Framework.DAL.csproj">
+      <Project>{D988D0DA-99C9-4BB6-98BB-4C0526F6F524}</Project>
+      <Name>GMS.Framework.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

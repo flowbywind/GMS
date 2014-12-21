@@ -1,0 +1,64 @@
+﻿@using GMS.Framework.Contract
+@using GMS.Framework.Web.Controls
+@using GMS.Account.Contract
+@model User
+@{
+    Layout = "~/Views/Shared/_Layout.Edit.cshtml";
+}
+@section PageSpecificStyleSheetIncludes{
+    <style type="text/css"> 
+        
+    </style>
+}
+@section PageSpecificJavascriptIncludes{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+        });
+   </script>
+}
+@section MainContent{
+    <div class="portlet-body form-horizontal form-bordered form-row-stripped">
+        <div class="row-fluid">
+            
+                <div class="control-group">
+                    <label class="control-label"><span class="required">*</span>登录名：</label>
+                    <div class="controls">
+                        @Model.LoginName @Html.HiddenFor(m => m.ID)
+                    </div>
+                </div>
+
+               
+                <div class="control-group">
+                    <label class="control-label"><span class="required">*</span>原密码：</label>
+                    <div class="controls">
+                    @Html.PasswordFor(m => m.Password, new { @class = "m-wrap small" })
+                    <span class="help-inline">@Html.ValidationMessageFor(m => m.Password)</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label"><span class="required">*</span>新密码：</label>
+                    <div class="controls">
+                    @Html.PasswordFor(m => m.NewPassword, new { @class = "m-wrap small" })
+                    <span class="help-inline">@Html.ValidationMessageFor(m => m.NewPassword)</span>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">邮箱：</label>
+                    <div class="controls">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "m-wrap small" })
+                    <span class="help-inline">@Html.ValidationMessageFor(m => m.Email)</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">手机：</label>
+                    <div class="controls">
+                    @Html.TextBoxFor(m => m.Mobile, new { @class = "m-wrap small" })
+                    <span class="help-inline">@Html.ValidationMessageFor(m => m.Mobile)</span>
+                    </div>
+                </div>
+        </div>
+}

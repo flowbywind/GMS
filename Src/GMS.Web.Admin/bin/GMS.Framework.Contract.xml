@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GMS.Framework.Contract</name>
+    </assembly>
+    <members>
+        <member name="T:GMS.Framework.Contract.BusinessException">
+            <summary>
+            业务异常，用于在后端抛出到前端做相应处理
+            </summary>
+        </member>
+        <member name="T:GMS.Framework.Contract.IAuditable">
+            <summary>
+            用于写数据修改，添加等历史日志
+            </summary>
+        </member>
+        <member name="T:GMS.Framework.Contract.PagedList`1">
+            <summary>
+            分页数据集合，用于后端返回分页好的集合及前端视图分页控件绑定
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:GMS.Framework.Contract.Request">
+            <summary>
+            用于BLL方法提传入条件
+            </summary>
+        </member>
+        <member name="T:GMS.Framework.Contract.WCFContext">
+            <summary>
+            服务调用上下文，主要传输IP，操作人，认证等数据，可用于WCF传输用
+            </summary>
+        </member>
+    </members>
+</doc>

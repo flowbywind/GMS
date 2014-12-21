@@ -1,0 +1,155 @@
+﻿@using GMS.Framework.Contract
+@using GMS.Framework.Web.Controls
+@using GMS.Crm.Contract
+@using GMS.Web
+@model VisitRecord
+@{
+    Layout = "~/Views/Shared/_Layout.Edit.cshtml";
+}
+@section PageSpecificStyleSheetIncludes{
+    <style type="text/css">
+        .controls label
+        {
+            display:inline;
+        }
+        .custom-combobox input{ height:28px; margin:1px;}
+        .custom-combobox a{ height:30px; }
+    </style>
+}
+@section PageSpecificJavascriptIncludes{
+    <script type="text/javascript" src="@Url.StaticFile("/content/scripts/jquery-ui.combobox.js")"></script>
+    <script type="text/javascript" src="@Url.StaticFile("/content/scripts/jquery.powerFloat.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#CityId").change(function () {
+                $("#areas").load("@Url.Action("GetArea")?cityId=" + this.value);
+            });
+
+            $("#CustomerId").combobox();
+        });
+   </script>
+}
+@section MainContent{
+<div class="portlet-body form-horizontal form-bordered form-row-stripped">
+    <div class="row-fluid"> 
+            <div class="alert alert-info">
+                <button class="close" data-dismiss="alert"></button>
+                <strong>注意：</strong>
+                如果还没添加任何客户，请先转到客户管理频道，添加新的客户！
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>我的客户：</label>
+                <div class="controls">
+                @Html.DropDownList("CustomerId")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.CustomerId)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>类别：</label>
+                <div class="controls">
+                @Html.DropDownList("VisitWay")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.VisitWay)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>区域：</label>
+                <div class="controls">
+                @Html.DropDownList("CityId")  
+                <span id="areas">@Html.Partial("AreaSelect")</span>
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.CityId)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>项目：</label>
+                <div class="controls">
+                @Html.DropDownList("ProjectId")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.ProjectId)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>跟进级别：</label>
+                <div class="controls">
+                @Html.DropDownList("FollowLevel")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.FollowLevel)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>跟进阶段：</label>
+                <div class="controls">
+                @Html.DropDownList("FollowStep")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.FollowStep)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>意向产品：</label>
+                <div class="controls">
+                @Html.DropDownList("ProductType")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.ProductType)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>可能性：</label>
+                <div class="controls">
+                @Html.TextBox("Probability", null, new { @class = "integer" }) %
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Probability)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>购房动机：</label>
+                <div class="controls">
+                @Html.RadioBoxList("Motivation")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Motivation)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>面积需求：</label>
+                <div class="controls">
+                @Html.RadioBoxList("AreaDemand")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.AreaDemand)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>价格反应：</label>
+                <div class="controls">
+                @Html.RadioBoxList("PriceResponse")   
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.PriceResponse)</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">认知途径：</label>
+                <div class="controls">
+                @Html.CheckBoxList("CognitiveChannel")    
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">关注重点：</label>
+                <div class="controls">
+                @Html.RadioBoxList("Focus")   
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">沟通细节：</label>
+                <div class="controls">
+                @Html.TextArea("Detail", new { style="width:80%"}) 
+                </div>
+            </div>
+
+    </div>
+</div>
+}
+

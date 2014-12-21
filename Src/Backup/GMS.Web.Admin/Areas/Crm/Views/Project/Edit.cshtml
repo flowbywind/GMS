@@ -1,0 +1,27 @@
+﻿@using GMS.Framework.Contract
+@using GMS.Framework.Web.Controls
+@using GMS.Crm.Contract
+@using GMS.Web
+@model Project
+@{
+    Layout = "~/Views/Shared/_Layout.Edit.cshtml";
+}
+@section PageSpecificStyleSheetIncludes{
+}
+@section PageSpecificJavascriptIncludes{
+}
+@section MainContent{
+<div class="portlet-body form-horizontal form-bordered form-row-stripped">
+    <div class="row-fluid"> 
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>名称：</label>
+                <div class="controls">
+                @Html.TextBoxFor(m => m.Name, new { @class = "m-wrap" })
+                <span class="help-inline">@Html.ValidationMessageFor(m => m.Name)</span>
+                </div>
+            </div>
+
+    </div>
+</div>
+}
+

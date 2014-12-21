@@ -1,0 +1,6 @@
+D:\Git\Web\GMS\bin\GMS.Framework.DAL.XML
+D:\Git\Web\GMS\bin\GMS.Framework.DAL.dll
+D:\Git\Web\GMS\bin\GMS.Framework.DAL.pdb
+D:\Git\Web\GMS\Src\GMS.Framework.DAL\obj\Debug\GMS.Framework.DAL.csprojResolveAssemblyReference.cache
+D:\Git\Web\GMS\Src\GMS.Framework.DAL\obj\Debug\GMS.Framework.DAL.dll
+D:\Git\Web\GMS\Src\GMS.Framework.DAL\obj\Debug\GMS.Framework.DAL.pdb

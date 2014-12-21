@@ -1,0 +1,237 @@
+﻿@using GMS.Framework.Contract
+@using GMS.Framework.Utility
+@using GMS.Framework.Web.Controls
+@using GMS.Crm.Contract
+@using GMS.Web
+@using GMS.Web.Admin.Common
+
+@model PagedList<VisitRecord>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section PageSpecificStyleSheetIncludes{
+    <style type="text/css"> 
+        select { margin:1px; width:150px;}
+        .p5 { padding:0px; padding-top:5px; line-height:200%; background:#fbfbfb;  }
+        .p5 label { width:80px; text-align:right;}
+        .p5 select { width:133px;}
+        #hourslider { display:inline-block;  width:120px; margin-top:10px; margin-left:30px;}
+    </style>
+}
+@section PageSpecificJavascriptIncludes{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var dates = $("#startDate, #endDate").datepicker({
+                dateFormat: "yy-mm-dd",
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2,
+                onSelect: function (selectedDate) {
+                    var option = this.id == "startDate" ? "minDate" : "maxDate",
+					instance = $(this).data("datepicker"),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings);
+                    dates.not(this).datepicker("option", option, date);
+                }
+            });
+
+            $("#username").autocomplete({
+                source: '@Url.Action("GetUserNames", "Ajax")',
+                minLength: 1,
+                select: function (event, ui) {
+                }
+            });
+
+            $("#Customer_Name").autocomplete({
+                source: '@Url.Action("GetCustomerNames", "Ajax")',
+                minLength: 1,
+                select: function (event, ui) {
+                }
+            });
+
+            $("#hourslider").slider({
+                range: true,
+                min: 0,
+                max: 24,
+                step: 1,
+                values: [$("#startHour").val(), $("#endHour").val()],
+                slide: function (e, ui) {
+                    var timeText = getTime(ui.values[0]) + " - " + getTime(ui.values[1]);
+                    $('#timetext').html(timeText);
+
+                    $("#startHour").val(ui.values[0]);
+                    $("#endHour").val(ui.values[1]);
+                }
+            });
+
+            var timeText = getTime(parseInt($("#startHour").val())) + "-" + getTime(parseInt($("#endHour").val()));
+            $('#timetext').html(timeText);
+        });
+
+        function getTime(value) {
+            var hours = value;
+            if (hours < 10) hours = '0' + hours;
+            return hours + ':00';
+        }
+
+    </script>
+    }
+<div class="row-fluid">
+    <div class="span1">
+        <div>
+            <a class="btn blue thickbox" title='添加新来电记录' href="@Url.Action("Create")?TB_iframe=true&height=600&width=600"><i class="icon-plus icon-white"></i> 新增</a>
+            <br />
+            <a class="btn red" id="delete" href="javascript:;"><i class="icon-trash icon-white"></i> 删除</a>
+        </div>
+    </div>
+    <div class="span11">
+        @using (Html.BeginForm(null, null, null, FormMethod.Get, new { id = "search", @class = "form-inline" }))
+        { 
+        <div class="p5">
+            <label>置业顾问：</label>@Html.TextBox("username", Request["username"], new { @class = "m-wrap small" })&nbsp;
+             <label>客户名：</label>@Html.TextBox("Customer.Name", Request["Customer.Name"], new { @class = "m-wrap small" })&nbsp;
+             <label>客户编号：</label>@Html.TextBox("Customer.Number", Request["Customer.Number"], new { @class = "m-wrap small" })&nbsp;
+             <label>客户电话：</label>@Html.TextBox("Customer.Tel", Request["Customer.Tel"], new { @class = "m-wrap small" })&nbsp;
+         </div>
+        <div class="p5">
+            <label>客户类型：</label>@Html.DropDownList("VisitWay", "全部")&nbsp;
+            <label>区域：</label>@Html.DropDownList("AreaId", "全部")&nbsp;
+            <label>项目：</label>@Html.DropDownList("ProjectId", "全部")&nbsp;
+            <label>购房动机：</label>@Html.DropDownList("Motivation", "全部")&nbsp;
+        </div>
+        <div class="p5">
+            <label>面积需求：</label>@Html.DropDownList("AreaDemand", "全部")&nbsp;
+            <label>价格反应：</label>@Html.DropDownList("PriceResponse", "全部")&nbsp;
+            <label>认知途径：</label>@Html.DropDownList("CognitiveChannel", "全部")&nbsp;
+            <label>关注重点：</label>@Html.DropDownList("Focus", "全部")&nbsp;
+        </div>
+        <div class="p5">
+            <label>开始时间：</label>@Html.TextBox("startDate", null, new { @class = "m-wrap small" })&nbsp;
+            <label>结束时间：</label>@Html.TextBox("endDate", null, new { @class = "m-wrap small" })&nbsp;
+            <div id="hourslider"></div>&nbsp;
+             <span id="timetext"></span>&nbsp;
+             @Html.Hidden("startHour", string.IsNullOrEmpty(Request["startHour"]) ? "0" : Request["startHour"]) 
+             @Html.Hidden("endHour", string.IsNullOrEmpty(Request["endHour"]) ? "24" : Request["endHour"]) 
+             
+             <button type="submit" class="btn">搜索 <i class="icon-search"></i></button>
+        </div>
+        }
+    </div>
+</div>
+
+@using (Html.BeginForm("Delete", "VisitRecord", FormMethod.Post, new { id = "mainForm" }))
+{
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th style="width: 8px;">
+                <input type="checkbox" id="checkall" class="group-checkable" />
+            </th>
+            <th width="50">
+                 客户名
+            </th>
+            <th >
+                编号
+            </th>
+            <th >
+                电话
+            </th>
+            <th >
+                类型
+            </th>
+            <th >
+                区域
+            </th>
+            <th >
+                项目
+            </th>
+            <th >
+                购房动机
+            </th>
+            <th >
+                面积需求
+            </th>
+            <th >
+                价格反应
+            </th>
+            <th >
+                认知途径
+            </th>
+            <th >
+                关注重点
+            </th>
+            <th >
+                置业顾问
+            </th>
+            <th >
+                来访时间
+            </th> 
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+        <tr>
+            <td>
+                <input type="checkbox" class="checkboxes" name='ids' value='@p.ID' />
+            </td>
+            <td class="blue">
+                <span>@(p.Customer == null ? string.Empty : p.Customer.Name)</span>
+            </td>
+            <td>
+                <span>@(p.Customer == null ? string.Empty : p.Customer.Number)</span>
+            </td>
+            <td>
+                <span>@(p.Customer == null ? string.Empty : p.Customer.Tel)</span>
+            </td>
+            <td>
+                <span>@EnumHelper.GetEnumTitle((EnumVisitWay)p.VisitWay)</span>
+            </td>
+            <td>
+                <span>@AdminCacheContext.Current.AreaDic[p.AreaId].Name</span>
+                <span class="gray">-@AdminCacheContext.Current.CityDic[p.CityId].Name</span>
+            </td>
+            <td>
+                <span>@(p.Customer == null ? string.Empty : StringUtil.CutString(p.Project.Name, 10))</span>
+            </td>
+             <td>
+                <span>@EnumHelper.GetEnumTitle((EnumMotivation)p.Motivation)</span>
+            </td>
+             <td>
+                <span>@EnumHelper.GetEnumTitle((EnumAreaDemand)p.AreaDemand)</span>
+            </td>
+             <td>
+                <span>@EnumHelper.GetEnumTitle((EnumPriceResponse)p.PriceResponse)</span>
+            </td>
+            <td>
+                <span>@StringUtil.CutString(EnumHelper.GetEnumTitle((EnumCognitiveChannel)p.CognitiveChannel), 20)</span>
+            </td>
+            <td>
+                <span>@StringUtil.CutString(EnumHelper.GetEnumTitle((EnumFocus)p.Focus), 20)</span>
+            </td>
+            <td class="green">
+                <span>@p.Username</span>
+            </td>
+            <td>
+                <span>@p.VisitTime.ToString("yyyy-MM-dd HH:mm")</span>
+            </td>
+            <td>
+                <a class="btn mini purple thickbox" title='编辑来电记录内容' href="@Url.Action("Edit", new { id = p.ID })?TB_iframe=true&height=600&width=600">
+                    <i class="icon-edit"></i>
+                    编辑
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+<div class="dataTables_paginate paging_bootstrap pagination">
+    @Html.Pager(Model, new PagerOptions() { ShowTotalItemCount = true })
+</div>
+
